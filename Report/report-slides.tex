@@ -1,0 +1,515 @@
+%
+% ---------------------------------------------------------------
+% Copyright (C) 2012-2018 Gang Li
+% ---------------------------------------------------------------
+%
+% This work is the default powerdot-tuliplab style test file and may be
+% distributed and/or modified under the conditions of the LaTeX Project Public
+% License, either version 1.3 of this license or (at your option) any later
+% version. The latest version of this license is in
+% http://www.latex-project.org/lppl.txt and version 1.3 or later is part of all
+% distributions of LaTeX version 2003/12/01 or later.
+%
+% This work has the LPPL maintenance status "maintained".
+%
+% This Current Maintainer of this work is Gang Li.
+%
+%
+
+\documentclass[
+ size=14pt,
+ paper=smartboard,  %a4paper, smartboard, screen
+ mode=present, 		%present, handout, print
+ display=slides, 	% slidesnotes, notes, slides
+ style=tuliplab,  	% TULIP Lab style
+ pauseslide,
+ fleqn,leqno]{powerdot}
+
+
+\usepackage{cancel}
+\usepackage{caption}
+\usepackage{stackengine}
+\usepackage{smartdiagram}
+\usepackage{attrib}
+\usepackage{amssymb}
+\usepackage{amsmath} 
+\usepackage{amsthm} 
+\usepackage{mathtools}
+\usepackage{rotating}
+\usepackage{graphicx}
+\usepackage{boxedminipage}
+\usepackage{rotate}
+\usepackage{calc}
+\usepackage[absolute]{textpos}
+\usepackage{psfrag,overpic}
+\usepackage{fouriernc}
+\usepackage{pstricks,pst-3d,pst-grad,pstricks-add,pst-text,pst-node,pst-tree}
+\usepackage{moreverb,epsfig,subfigure}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{etex}
+\usepackage{breqn}
+\usepackage{multirow}
+\usepackage{natbib}
+\usepackage{bibentry}
+\usepackage{gitinfo2}
+\usepackage{siunitx}
+\usepackage{nicefrac}
+%\usepackage{geometry}
+%\geometry{verbose,letterpaper}
+\usepackage{media9}
+\usepackage{animate}
+%\usepackage{movie15}
+\usepackage{auto-pst-pdf}
+
+\usepackage{breakurl}
+\usepackage{fontawesome}
+\usepackage{xcolor}
+\usepackage{multicol}
+
+
+
+\usepackage{verbatim}
+\usepackage[utf8]{inputenc}
+\usepackage{dtk-logos}
+\usepackage{tikz}
+\usepackage{adigraph}
+%\usepackage{tkz-graph}
+\usepackage{hyperref}
+%\usepackage{ulem}
+\usepackage{pgfplots}
+\usepackage{verbatim}
+\usepackage{fontawesome}
+
+
+\usepackage{todonotes}
+% \usepackage{pst-rel-points}
+\usepackage{animate}
+\usepackage{fontawesome}
+
+\usepackage{listings}
+\lstset{frameround=fttt,
+frame=trBL,
+stringstyle=\ttfamily,
+backgroundcolor=\color{yellow!20},
+basicstyle=\footnotesize\ttfamily}
+\lstnewenvironment{code}{
+\lstset{frame=single,escapeinside=`',
+backgroundcolor=\color{yellow!20},
+basicstyle=\footnotesize\ttfamily}
+}{}
+
+% \usepackage[CJKbookmarks=true]{hyperref}
+% \usepackage{hyperref}
+\hypersetup{ % TODO: PDF meta Data
+  pdftitle={Presentation Title},
+  pdfauthor={Gang Li},
+  pdfpagemode={FullScreen},
+  pdfborder={0 0 0}
+}
+
+% \usepackage{auto-pst-pdf}
+% package to show source code
+
+\definecolor{LightGray}{rgb}{0.9,0.9,0.9}
+\newlength{\pixel}\setlength\pixel{0.000714285714\slidewidth}
+\setlength{\TPHorizModule}{\slidewidth}
+\setlength{\TPVertModule}{\slideheight}
+\newcommand\highlight[1]{\fbox{#1}}
+\newcommand\icite[1]{{\footnotesize [#1]}}
+
+\newcommand\twotonebox[2]{\fcolorbox{pdcolor2}{pdcolor2}
+{#1\vphantom{#2}}\fcolorbox{pdcolor2}{white}{#2\vphantom{#1}}}
+\newcommand\twotoneboxo[2]{\fcolorbox{pdcolor2}{pdcolor2}
+{#1}\fcolorbox{pdcolor2}{white}{#2}}
+\newcommand\vpspace[1]{\vphantom{\vspace{#1}}}
+\newcommand\hpspace[1]{\hphantom{\hspace{#1}}}
+\newcommand\COMMENT[1]{}
+
+\newcommand\placepos[3]{\hbox to\z@{\kern#1
+        \raisebox{-#2}[\z@][\z@]{#3}\hss}\ignorespaces}
+
+\renewcommand{\baselinestretch}{1.2}
+
+
+\newcommand{\draftnote}[3]{
+	\todo[author=#2,color=#1!30,size=\footnotesize]{\textsf{#3}}	}
+% TODO: add yourself here:
+%
+\newcommand{\gangli}[1]{\draftnote{blue}{GLi:}{#1}}
+\newcommand{\shaoni}[1]{\draftnote{green}{sn:}{#1}}
+\newcommand{\gliMarker}
+	{\todo[author=GLi,size=\tiny,inline,color=blue!40]
+	{Gang Li has worked up to here.}}
+\newcommand{\snMarker}
+	{\todo[author=Sn,size=\tiny,inline,color=green!40]
+	{Shaoni has worked up to here.}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% title
+% TODO: Customize to your Own Title, Name, Address
+%
+\title{House Prices Prediction}
+\author{
+Bo Yang
+\\
+\\Xi'an Shiyou University
+}
+\date{\gitCommitterDate}
+
+
+% Customize the setting of slides
+\pdsetup{
+% TODO: Customize the left footer, and right footer
+rf=\href{http://www.tulip.org.au}{
+Last Changed by: \textsc{\gitCommitterName}
+},
+cf={House Prices Prediction},
+}
+
+
+\begin{document}
+
+\maketitle
+
+%\begin{slide}{Overview}
+%\tableofcontents[content=sections]
+%\end{slide}
+
+
+%%==========================================================================================
+%%
+\begin{slide}[toc=,bm=]{Overview}
+\tableofcontents[content=currentsection,type=1]
+\end{slide}
+%%
+%%==========================================================================================
+
+
+\section{Problem Description}
+
+
+
+%%==========================================================================================
+%%
+\begin{slide}[toc=,bm=]{Problem Description}
+\begin{itemize}
+\item
+\ Ask a home buyer to describe their dream house, and they probably won't begin with the height of the basement ceiling or the proximity to an east-west railroad. But this playground competition's dataset proves that much more influences price negotiations than the number of bedrooms or a white-picket fence.
+
+\smallskip
+\item 
+With 79 explanatory variables describing (almost) every aspect of residential homes in Ames, Iowa, this competition challenges you to predict the final price of each home.
+
+\item 
+Goal: To predict the sales price for each house. For each Id in the test set, you must predict the value of the SalePrice variable. 
+
+\item
+Metric: Root-Mean-Squared-Error (RMSE)
+\end{itemize}
+
+
+%%==========================================================================================
+\begin{note}
+Next,
+I will introduce the non-trivial outlying subspaces.
+Non-Trivial outlying subspaces are multi-dimension subspaces.
+In the subspace,
+the query group's outlying degree is larger than the threshold $\alpha$.
+
+Table $2$ shows that,
+when the threshold $\alpha$ equal four,
+the non-trivial outlying subspace is \{$F_3$, $F_4$\}.
+\end{note}
+%%==========================================================================================
+
+\end{slide}
+%%
+%%==========================================================================================
+
+
+\section{Data Preview}
+
+
+%%==========================================================================================
+%%
+\begin{slide}[toc=,bm=]{Data Preview}
+  \begin{figure}
+    \includegraphics[width=1.0\textwidth,height=.2\textwidth]{H:/1.eps}
+    \caption{Train Data}
+    \label{fig:1}
+    \includegraphics[width=1.0\textwidth,height=.2\textwidth]{H:/2.eps}
+    \caption{Test Data}
+    \label{fig:2}
+  \end{figure}
+
+%%==========================================================================================
+\begin{note}
+In conclusion,
+we firstly formalized the problem of
+group outlying aspects mining,
+
+Then proposed a novel method GOAM algorithm to address the problem of
+group outlying aspects mining,
+and the proposed method use pruning to reduce time complexity
+while identifying the suitable set of outlying features for the interested group.
+
+Thank you and any question?
+\end{note}
+%%==========================================================================================
+
+\end{slide}
+%%
+%%==========================================================================================
+
+
+%%
+%%==========================================================================================
+
+
+\section{Data Preprocessing}
+
+
+%%==========================================================================================
+%%
+
+
+%%==========================================================================================
+%%
+\begin{slide}{Outlier handling}
+\begin{itemize}
+  \item
+  Outlier handling.
+\end{itemize}
+  
+\begin{figure}[t]
+  \includegraphics[width=1.08\textwidth,height=.33\textwidth]{H:/3.eps}
+  \caption{Scatter diagram}
+  \label{fig:3}
+\end{figure}
+
+\end{slide}
+%%
+%%==========================================================================================
+
+
+%%==========================================================================================
+%%
+\begin{slide}{Target variable analysis}
+  \begin{itemize}
+    \item
+    Target variable analysis.
+  \end{itemize}
+    
+  \begin{figure}
+    \centering
+    \subfigure[pic1]{
+    \includegraphics[width=0.45\textwidth,height=.48\textwidth]{H:/4.eps}
+    %\caption{Medical}
+    \label{fig:4}
+    }
+    \quad
+    \subfigure[pic2]{
+    \includegraphics[width=0.45\textwidth,height=.48\textwidth]{H:/5.eps}
+    %\caption{Medical}
+    \label{fig:5}
+    }
+  
+  \end{figure}
+  
+  \end{slide}
+  %%
+  %%==========================================================================================
+
+
+%%==========================================================================================
+%%
+\begin{slide}{Missing value handling}
+    
+  \begin{figure}
+    \includegraphics[width=0.4\textwidth,height=.5\textwidth]{H:/6.eps}
+    \caption{Deletion rate}
+    \label{fig:6}
+  \end{figure}
+  
+  \end{slide}
+  %%
+  %%==========================================================================================
+
+
+%%==========================================================================================
+%%
+\begin{slide}{Missing value handling}
+    
+  \begin{figure}
+    \includegraphics[width=1.05\textwidth,height=.55\textwidth]{H:/7.eps}
+    \caption{Feature missing rate bar graph}
+    \label{fig:7}
+  \end{figure}
+  
+  \end{slide}
+  %%
+  %%==========================================================================================
+
+
+%%==========================================================================================
+%%
+\begin{slide}[toc=,bm=]{Fill in missing values}
+  \begin{itemize}
+  \item
+  In data_ description.txt. It has been explained that some of the characteristic values are missing because these houses do not have this feature at all. In this case, we use "None" or "0" to fill in.
+  \begin{itemize}
+  \item
+  PoolQC
+  \item
+  MiscFeature
+  \item
+  Alley
+  \item
+  Fence
+  \item
+  FireplaceQu
+  \item Electrical
+  \item
+  LotFrontage
+  \item
+  Functional
+  \end{itemize}
+  \end{itemize}
+  
+  
+  \end{slide}
+
+%%
+%%==========================================================================================
+
+
+\section{Feature Engineering}
+
+
+%%==========================================================================================
+%%
+\begin{slide}{Feature correlation}
+    
+  \begin{figure}
+    \includegraphics[width=0.9\textwidth,height=.55\textwidth]{H:/8.eps}
+    \caption{Correlation matrix heat map}
+    \label{fig:8}
+  \end{figure}
+  
+  \end{slide}
+%%
+%%==========================================================================================
+
+%%==========================================================================================
+%%
+\begin{slide}[toc=,bm=]{Mining features}
+  \begin{itemize}
+  \item
+  Convert some numerical features to classification features.
+  \begin{itemize}
+  \item
+  MSSubClass, YrSold, MoSold
+  \end{itemize}
+
+  \item
+  Convert some classification features to numerical features.
+  \begin{itemize}
+  \item
+  PoolQC
+  \end{itemize}
+
+  \item
+  Use some important features to construct more features.
+  \begin{itemize}
+  \item
+  TotalBsmtSF, 1stFlrSF, 2ndFlrSF
+  \end{itemize}
+  
+  \end{itemize}
+  
+  \end{slide}
+  %%
+%%==========================================================================================
+
+
+%%==========================================================================================
+%%
+\begin{slide}{Transform features}
+    
+  \begin{figure}
+    \includegraphics[width=0.4\textwidth,height=.5\textwidth]{H:/9.eps}
+    \caption{Feature skewness}
+    \label{fig:9}
+  \end{figure}
+  
+  \end{slide}
+%%
+%%==========================================================================================
+
+
+\section{Build Model}
+
+
+%%==========================================================================================
+%%
+\begin{slide}{Model}
+    
+  \begin{figure}
+    \includegraphics[width=0.7\textwidth,height=.3\textwidth]{H:/11.eps}
+    \caption{Score}
+    \label{fig:11}
+  \end{figure}
+  
+  \begin{itemize}
+    \item
+    Stacking Averaged models score:0.1083
+    \item
+    Integration model score:0.0741
+  \end{itemize}
+
+  \end{slide}
+%%
+%%==========================================================================================
+
+
+\section{Predict results}
+
+
+%%==========================================================================================
+%%
+\begin{slide}{Predict results}
+    
+  \begin{figure}
+    \includegraphics[width=0.35\textwidth,height=.5\textwidth]{H:/10.eps}
+    \caption{Predict results}
+    \label{fig:10}
+  \end{figure}
+  
+  \end{slide}
+%%
+%%==========================================================================================
+
+
+%%==========================================================================================
+% TODO: Contact Page
+\begin{wideslide}[toc=,bm=]{Ending}
+\centering
+\vspace{\stretch{1}}
+\twocolumn[
+lcolwidth=0.35\linewidth,
+rcolwidth=0.65\linewidth
+]
+{
+% \centerline{\includegraphics[scale=.2]{tulip-logo.eps}}
+}
+{
+\vspace{\stretch{1}}
+\LARGE Thanks for watching!
+}
+\vspace{\stretch{1}}
+\end{wideslide}
+
+\end{document}
+
+\endinput
